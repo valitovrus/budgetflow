@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using BudgetFlow.Db;
 
 namespace BudgetFlow
 {
@@ -29,6 +31,8 @@ namespace BudgetFlow
         {
             // Add framework services.
             services.AddMvc();
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=BudgetFlow;Trusted_Connection=True;";
+            services.AddDbContext<BudgetFlowContext>(options => options.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
