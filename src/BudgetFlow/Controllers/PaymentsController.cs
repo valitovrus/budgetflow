@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using BudgetFlow.Models;
+using BudgetFlow.Db;
 
 namespace BudgetFlow.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class PaymentsController : Controller
     {
+        IPaymentsRepository _paymentsRepository = new InMemoryPaymentsRepository();
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Payment> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _paymentsRepository.Get();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Payment Get(int id)
         {
-            return "value";
+            return null;
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public int Post([FromBody]Payment value)
         {
+            return _paymentsRepository.CreateNew(value);
         }
 
         // PUT api/values/5
