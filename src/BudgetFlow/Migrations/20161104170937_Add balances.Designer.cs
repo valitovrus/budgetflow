@@ -8,9 +8,10 @@ using BudgetFlow.Db;
 namespace BudgetFlow.Migrations
 {
     [DbContext(typeof(BudgetFlowContext))]
-    partial class BudgetFlowContextModelSnapshot : ModelSnapshot
+    [Migration("20161104170937_Add balances")]
+    partial class Addbalances
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

@@ -16,6 +16,7 @@ namespace BudgetFlow.Db
 
 
         public DbSet<PaymentDBO> Payments { get; set; }
+        public DbSet<BalanceDBO> Balances { get; set; }
     }
 
     public class PaymentDBO : Payment
@@ -26,9 +27,20 @@ namespace BudgetFlow.Db
         }
         public PaymentDBO(Payment payment)
         {
-            this.Amount = payment.Amount;
-            this.Date = payment.Date;
-            this.Frequency = payment.Frequency;
+            payment.CopyTo(this);
+        }
+
+        public int Id { get; set; }
+    }
+    public class BalanceDBO : Balance
+    {
+        public BalanceDBO()
+        {
+
+        }
+        public BalanceDBO(Balance payment)
+        {
+            payment.CopyTo(this);
         }
 
         public int Id { get; set; }
