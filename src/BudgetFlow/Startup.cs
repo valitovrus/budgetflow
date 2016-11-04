@@ -31,8 +31,12 @@ namespace BudgetFlow
         {
             // Add framework services.
             services.AddMvc();
+            // sqllocaldb info mssqllocaldb
+            // sqllocaldb start mssqllocaldb
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=BudgetFlow;Trusted_Connection=True;";
             services.AddDbContext<BudgetFlowContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddTransient<IPaymentsRepository, PaymentsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

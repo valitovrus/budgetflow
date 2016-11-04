@@ -20,6 +20,17 @@ namespace BudgetFlow.Db
 
     public class PaymentDBO : Payment
     {
+        public PaymentDBO()
+        {
+
+        }
+        public PaymentDBO(Payment payment)
+        {
+            this.Amount = payment.Amount;
+            this.Date = payment.Date;
+            this.Frequency = payment.Frequency;
+        }
+
         public int Id { get; set; }
     }
 }

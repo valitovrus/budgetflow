@@ -11,7 +11,12 @@ namespace BudgetFlow.Controllers
     [Route("api/[controller]")]
     public class PaymentsController : Controller
     {
-        IPaymentsRepository _paymentsRepository = new InMemoryPaymentsRepository();
+        IPaymentsRepository _paymentsRepository;
+
+        public PaymentsController(IPaymentsRepository repository)
+        {
+            _paymentsRepository = repository;
+        }
         // GET api/values
         [HttpGet]
         public IEnumerable<Payment> Get()
