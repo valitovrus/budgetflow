@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BudgetFlow", "src\BudgetFlow\BudgetFlow.xproj", "{DF4CF004-0E45-4789-9B4F-CEB6C8B478F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C3093B3F-DCA4-476D-9380-4DD385FF1924}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BudgetFlow.Tests", "tests\BudgetFlow.Tests\BudgetFlow.Tests.xproj", "{D92E2245-7451-4C70-8507-28C33BC4763C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +26,16 @@ Global
 		{DF4CF004-0E45-4789-9B4F-CEB6C8B478F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF4CF004-0E45-4789-9B4F-CEB6C8B478F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF4CF004-0E45-4789-9B4F-CEB6C8B478F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D92E2245-7451-4C70-8507-28C33BC4763C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D92E2245-7451-4C70-8507-28C33BC4763C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D92E2245-7451-4C70-8507-28C33BC4763C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D92E2245-7451-4C70-8507-28C33BC4763C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DF4CF004-0E45-4789-9B4F-CEB6C8B478F4} = {37AFB616-20F6-455D-948B-C6AC972A3D71}
+		{D92E2245-7451-4C70-8507-28C33BC4763C} = {C3093B3F-DCA4-476D-9380-4DD385FF1924}
 	EndGlobalSection
 EndGlobal
