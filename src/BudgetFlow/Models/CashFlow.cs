@@ -12,10 +12,12 @@ namespace BudgetFlow.Models
         {
             get { return _items; }
         }
-
+        CashFlowItem _last = null;
         internal void Add(string paymentName, DateTime date, decimal amount)
         {
-            _items.Add(new CashFlowItem(paymentName, date, amount));
+            var newItem = new CashFlowItem(paymentName, date, amount, _last);
+            _items.Add(newItem);
+            _last = newItem;
         }
     }
 }
