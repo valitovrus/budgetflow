@@ -22,20 +22,34 @@ namespace BudgetFlow.Services
             var cashflow = new CashFlow();
             cashflow.Add("Balance", fromBalance.Date, fromBalance.Amount);
 
-            var paymentOrder = new List<Tuple<DateTime, Payment>>();
-
-
             foreach (Payment p in _paymentsRepository.Get())
             {
-                if (p.Frequency == PaymentFrequency.Once && p.Date.Between(fromBalance.Date, toDate))
+                // if it looks stupid but works, it's not stupid :-\
+                // it has to be rewritten, anyway
+                for (var date = fromBalance.Date; date <= toDate; date = date.AddDays(1))
                 {
-                    paymentOrder.Add(new Tuple<DateTime, Payment>(p.Date, p));
+                    switch (p.Frequency)
+                    {
+                        case PaymentFrequency.Once:
+                            if (p.Date.Day == date.Day && p.Date.Month == date.Month && p.Date.Year == date.Year)
+                                cashflow.Add(p.Name, date, p.Amount);
+                            break;
+                        case PaymentFrequency.Weekly:
+                            if (p.Date.DayOfWeek == date.DayOfWeek)
+                                cashflow.Add(p.Name, date, p.Amount);
+                            break;
+                        case PaymentFrequency.Monthly:
+                            if (p.Date.Day == date.Day)
+                                cashflow.Add(p.Name, date, p.Amount);
+                            break;
+                        case PaymentFrequency.Yearly:
+                            if (p.Date.Day == date.Day && p.Date.Month == date.Month)
+                                cashflow.Add(p.Name, date, p.Amount);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            paymentOrder.Sort((x, y) => x.Item1.CompareTo(y.Item1));
-            foreach (var item in paymentOrder)
-            {
-                cashflow.Add(item.Item2.Name, item.Item1, item.Item2.Amount);
             }
 
             return cashflow;
