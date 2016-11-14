@@ -10,5 +10,6 @@ namespace BudgetFlow.Db
     {
         int CreateNew(Balance payment);
         IEnumerable<Balance> Get();
+        Balance GetLast();
     }
 }

@@ -27,5 +27,9 @@ namespace BudgetFlow.Db
         {
             return _dbContext.Balances;
         }
+        public Balance GetLast()
+        {
+            return _dbContext.Balances.OrderByDescending(b => b.Date).First();
+        }
     }
 }
