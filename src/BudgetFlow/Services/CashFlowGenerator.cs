@@ -51,7 +51,7 @@ namespace BudgetFlow.Services
                     }
                 }
             }
-
+            cashflow.Sort();
             return cashflow;
         }
     }

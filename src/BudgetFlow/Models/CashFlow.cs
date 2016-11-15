@@ -13,11 +13,15 @@ namespace BudgetFlow.Models
             get { return _items; }
         }
         CashFlowItem _last = null;
-        internal void Add(string paymentName, DateTime date, decimal amount)
+        public void Add(string paymentName, DateTime date, decimal amount)
         {
             var newItem = new CashFlowItem(paymentName, date, amount, _last);
             _items.Add(newItem);
             _last = newItem;
+        }
+        public void Sort()
+        {
+            _items.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
     }
 }

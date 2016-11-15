@@ -25,6 +25,6 @@ namespace BudgetFlow.Models
         public string Payment { get; private set; }
         public DateTime Date { get; private set; }
         public decimal Amount { get; private set; }
-        public decimal Total { get { return this.Amount + (this._previous == null ? 0m : this._previous.Total); } }
+        public decimal Balance { get { return this.Amount + (this._previous == null ? 0m : this._previous.Balance); } }
     }
 }
