@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using BudgetFlow.Db;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace BudgetFlow
 {
@@ -38,6 +40,15 @@ namespace BudgetFlow
 
             services.AddTransient<IPaymentsRepository, PaymentsRepository>();
             services.AddTransient<IBalancesRepository, BalancesRepository>();
+
+            services.AddCors(options =>
+           {
+               options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin());
+           });
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAll"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
