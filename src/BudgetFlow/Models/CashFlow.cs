@@ -19,9 +19,5 @@ namespace BudgetFlow.Models
             _items.Add(newItem);
             _last = newItem;
         }
-        public void Sort()
-        {
-            _items.Sort((x, y) => x.Date.CompareTo(y.Date));
-        }
     }
 }

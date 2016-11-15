@@ -43,7 +43,7 @@ namespace BudgetFlow
 
             services.AddCors(options =>
            {
-               options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin());
+               options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
            });
             services.Configure<MvcOptions>(options =>
             {

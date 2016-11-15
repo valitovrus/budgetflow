@@ -21,7 +21,7 @@ namespace BudgetFlow.Services
         {
             var cashflow = new CashFlow();
             cashflow.Add("Balance", fromBalance.Date, fromBalance.Amount);
-
+            List<Tuple<DateTime, Payment>> payments = new List<Tuple<DateTime, Payment>>();
             foreach (Payment p in _paymentsRepository.Get())
             {
                 // if it looks stupid but works, it's not stupid :-\
@@ -32,26 +32,28 @@ namespace BudgetFlow.Services
                     {
                         case PaymentFrequency.Once:
                             if (p.Date.Day == date.Day && p.Date.Month == date.Month && p.Date.Year == date.Year)
-                                cashflow.Add(p.Name, date, p.Amount);
+                                payments.Add(new Tuple<DateTime, Payment>(date, p));
                             break;
                         case PaymentFrequency.Weekly:
                             if (p.Date.DayOfWeek == date.DayOfWeek)
-                                cashflow.Add(p.Name, date, p.Amount);
+                                payments.Add(new Tuple<DateTime, Payment>(date, p));
                             break;
                         case PaymentFrequency.Monthly:
                             if (p.Date.Day == date.Day)
-                                cashflow.Add(p.Name, date, p.Amount);
+                                payments.Add(new Tuple<DateTime, Payment>(date, p));
                             break;
                         case PaymentFrequency.Yearly:
                             if (p.Date.Day == date.Day && p.Date.Month == date.Month)
-                                cashflow.Add(p.Name, date, p.Amount);
+                                payments.Add(new Tuple<DateTime, Payment>(date, p));
                             break;
                         default:
                             break;
                     }
                 }
             }
-            cashflow.Sort();
+            payments.Sort((x, y) => x.Item1.CompareTo(y.Item1));
+            foreach (var t in payments)
+                cashflow.Add(t.Item2.Name, t.Item1, t.Item2.Amount);
             return cashflow;
         }
     }
