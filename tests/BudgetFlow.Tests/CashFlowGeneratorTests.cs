@@ -284,6 +284,48 @@ namespace BudgetFlow.Tests
                 Assert.True(curItem.Date <= item.Date);
                 curItem = item;
             }
+        }
+
+        [Fact]
+        public void GenerateDoesntTakePaymentsAtTheDayOfTheBalance()
+        {
+            var missingPayment = new Payment()
+            {
+                Amount = 2000,
+                Date = DateTime.Now.Date,
+                Frequency = PaymentFrequency.Once,
+                Name = "test"
+            };
+            var usingPayment = new Payment()
+            {
+                Amount = 134,
+                Date = DateTime.Now.Date.AddDays(1),
+                Frequency = PaymentFrequency.Once,
+                Name = "test"
+            };
+            var payments = new Mock<IPaymentsRepository>();
+            payments.Setup(p => p.Get()).Returns(new Payment[] { missingPayment, usingPayment });
+
+            var balance = new Balance() { Amount = 1000, Date = DateTime.Now.Date };
+
+            var generator = new CashFlowGenerator(payments.Object);
+            CashFlow cashFlow = generator.Generate(balance, DateTime.Now.Date.AddDays(10));
+
+            Assert.Collection(cashFlow.Items,
+                i =>
+                {
+                    Assert.Equal(balance.Amount, i.Amount);
+                    Assert.Equal(balance.Amount, i.Balance);
+                    Assert.Equal(balance.Date, i.Date);
+                    Assert.Equal("Balance", i.Payment);
+                },
+                 i =>
+                 {
+                     Assert.Equal(usingPayment.Amount, i.Amount);
+                     Assert.Equal(balance.Amount + usingPayment.Amount, i.Balance);
+                     Assert.Equal(DateTime.Now.Date.AddDays(1), i.Date);
+                     Assert.Equal(usingPayment.Name, i.Payment);
+                 });
 
         }
     }

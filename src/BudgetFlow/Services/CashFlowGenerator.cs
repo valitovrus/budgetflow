@@ -26,7 +26,7 @@ namespace BudgetFlow.Services
             {
                 // if it looks stupid but works, it's not stupid :-\
                 // it has to be rewritten, anyway
-                for (var date = fromBalance.Date; date <= toDate; date = date.AddDays(1))
+                for (var date = fromBalance.Date.AddDays(1); date <= toDate; date = date.AddDays(1))
                 {
                     switch (p.Frequency)
                     {
