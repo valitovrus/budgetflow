@@ -10,5 +10,8 @@ namespace BudgetFlow.Db
     {
         int CreateNew(Payment payment);
         IEnumerable<Payment> Get();
+        Payment Get(int id);
+        void Delete(int id);
+        void Update(int id, Payment value);
     }
 }

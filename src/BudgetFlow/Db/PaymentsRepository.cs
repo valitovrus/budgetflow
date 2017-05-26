@@ -22,9 +22,43 @@ namespace BudgetFlow.Db
             return dbo.Id;
         }
 
+
         public IEnumerable<Payment> Get()
         {
             return _dbContext.Payments;
         }
+
+        public Payment Get(int id)
+        {
+            return GetDBO(id);
+        }
+
+        private PaymentDBO GetDBO(int id)
+        {
+            return (from p in _dbContext.Payments
+                    where p.Id == id
+                    select p).FirstOrDefault();
+        }
+
+        public void Update(int id, Payment value)
+        {
+            PaymentDBO updating = this.GetDBO(id);
+            if (updating != null)
+            {
+                value.CopyTo(updating);
+                _dbContext.SaveChanges();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            PaymentDBO removing = this.GetDBO(id);
+            if (removing != null)
+            {
+                _dbContext.Payments.Remove(removing);
+                _dbContext.SaveChanges();
+            }
+        }
+
     }
 }

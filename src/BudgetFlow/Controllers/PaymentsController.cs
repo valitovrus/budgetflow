@@ -28,7 +28,7 @@ namespace BudgetFlow.Controllers
         [HttpGet("{id}")]
         public Payment Get(int id)
         {
-            return null;
+            return _paymentsRepository.Get(id);
         }
 
         // POST api/values
@@ -40,14 +40,19 @@ namespace BudgetFlow.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]Payment value)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            _paymentsRepository.Update(id, value);
+            return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _paymentsRepository.Delete(id);
         }
     }
 }
