@@ -1,20 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{37AFB616-20F6-455D-948B-C6AC972A3D71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8E69E5B5-E884-4E5A-8691-6A1C7EE5F23B}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BudgetFlow", "src\BudgetFlow\BudgetFlow.xproj", "{DF4CF004-0E45-4789-9B4F-CEB6C8B478F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C3093B3F-DCA4-476D-9380-4DD385FF1924}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BudgetFlow.Tests", "tests\BudgetFlow.Tests\BudgetFlow.Tests.xproj", "{D92E2245-7451-4C70-8507-28C33BC4763C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetFlow", "src\BudgetFlow\BudgetFlow.csproj", "{DF4CF004-0E45-4789-9B4F-CEB6C8B478F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetFlow.Tests", "tests\BudgetFlow.Tests\BudgetFlow.Tests.csproj", "{D92E2245-7451-4C70-8507-28C33BC4763C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
