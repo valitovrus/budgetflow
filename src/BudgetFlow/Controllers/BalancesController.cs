@@ -31,26 +31,31 @@ namespace BudgetFlow.Controllers
         [HttpGet("{id}")]
         public Balance Get(int id)
         {
-            throw new NotImplementedException();
+            return _balancesRepository.Get(id);
         }
 
         // POST api/values
         [HttpPost]
-        public int Post([FromBody]Balance balance)
+        public int Post([FromBody]Balance value)
         {
-            return _balancesRepository.CreateNew(balance);
+            return _balancesRepository.CreateNew(value);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Balance value)
+        public IActionResult Put(int id, [FromBody]Balance value)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            _balancesRepository.Update(id, value);
+            return Ok();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _balancesRepository.Delete(id);
         }
     }
 }
